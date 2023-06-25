@@ -85,6 +85,7 @@
         <type>text</type>
         <help>IP address of the remote logging server.</help>
     </field>
+    <field>
         <id>sensor.remoteport</id>
         <label>Remote Port</label>
         <type>text</type>
