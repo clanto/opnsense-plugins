@@ -28,7 +28,7 @@
  *
  */
 
-namespace OPNsense\HAProxy\Migrations;
+namespace OPNsense\Maltrail\Migrations;
 
 use OPNsense\Base\BaseModelMigration;
 
