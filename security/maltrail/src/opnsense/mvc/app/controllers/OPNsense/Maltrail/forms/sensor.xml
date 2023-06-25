@@ -6,10 +6,54 @@
         <help>This will activate the Sensor. Do not forget to enable the local server mode or send the logs to a remote server.</help>
     </field>
     <field>
-        <id>sensor.captureall</id>
-        <label>Capture All</label>
+        <id>sensor.processcount</id>
+        <label>Number of processes</label>
+        <type>text</type>
+        <help>Number of processes for sensor. Default 1.</help>
+    </field>
+    <field>
+        <id>sensor.disablecpuaffinity</id>
+        <label>Disable CPU affinity</label>
         <type>checkbox</type>
-        <help>This will look into all IPv4 and IPv6 traffic. If disabled it will only look for traffic for icmp, udp, tcp syn packets and on known HTTP ports.</help>
+        <help>Disable setting of CPU affinity (with schedtool) on Linux machines (e.g. because of load issues with other processes). Default not set.</help>
+    </field>
+    <field>
+        <id>sensor.usefeedupdates</id>
+        <label>Use feeds in trail updates</label>
+        <type>checkbox</type>
+        <help>Use feeds (too) in trail updates. Default set.</help>
+    </field>
+    <field>
+        <id>sensor.disablefeeds</id>
+        <label>Disable specified feeds</label>
+        <type>select_multiple</type>
+        <style>tokenize</style>
+        <allownew>true</allownew>
+        <help>Disable (retrieval from) specified feeds (Note: respective .py files inside /trails/feeds; turris and ciarmy/cinsscore seem to be too "noisy" lately; policeman is old and produces lots of false positives). Default: turris, ciarmy, policeman, myip, alienvault</help>
+    </field>
+    <field>
+        <id>sensor.ipminimumfeeds</id>
+        <label>IP minimum in feeds</label>
+        <type>text</type>
+        <help>Ignore IPs that appear on lower than IP_MINIMUM_FEEDS number of feeds (Note: static IP trails are always included). Default: 3</help>
+    </field>
+    <field>
+        <id>sensor.disabledtrailsinforegex</id>
+        <label>Disable trails based on regular expression</label>
+        <type>text</type>
+        <help>Disable trails based on the following regular expression run against the corresponding info. Default not set.</help>
+    </field>
+    <field>
+        <id>sensor.updateperiod</id>
+        <label>Update Period(seconds)</label>
+        <type>text</type>
+		<help>Update trails after every given period (seconds). Default 86400</help>
+    </field>
+    <field>
+        <id>sensor.customtrailsurl</id>
+        <label>Custom feed URL</label>
+        <type>text</type>
+		<help>Use remote custom feed (too) in trail updates. Default not set.</help>
     </field>
     <field>
         <id>sensor.capturebuffer</id>
@@ -18,12 +62,29 @@
         <help>Size of the ring buffer (in MB) to memory-map into the sensor processes for sharing captured network traffic. An undersized buffer may reduce detection rates. Defaults to 10% of available RAM when left blank.</help>
     </field>
     <field>
+        <id>sensor.monitorinterface</id>
+        <label>Monitor Interface</label>
+        <type>select_multiple</type>
+        <help>List of interface to listen on, none means listen on all interfaces.</help>
+    </field>
+    <field>
+        <id>sensor.captureall</id>
+        <label>Capture All</label>
+        <type>checkbox</type>
+        <help>This will look into all IPv4 and IPv6 traffic. If disabled it will only look for traffic for icmp, udp, tcp syn packets and on known HTTP ports.</help>
+    </field>
+    <field>
+        <id>sensor.name</id>
+        <label>Sensor Name</label>
+        <type>text</type>
+        <help>Sensor name to appear in produced logs. Default: $HOSTNAME</help>
+    </field>
+    <field>
         <id>sensor.remoteserver</id>
         <label>Remote Server</label>
         <type>text</type>
         <help>IP address of the remote logging server.</help>
     </field>
-    <field>
         <id>sensor.remoteport</id>
         <label>Remote Port</label>
         <type>text</type>
@@ -40,5 +101,83 @@
         <label>Syslog Port</label>
         <type>text</type>
         <help>Port of the syslog server.</help>
+    </field>
+    <field>
+        <id>sensor.logstashserver</id>
+        <label>Remote Server for JSON events</label>
+        <type>text</type>
+        <help>Remote address to send JSON events (e.g. Logstash)</help>
+    </field>
+    <field>
+        <id>sensor.logstashport</id>
+        <label>Remote Server for JSON events Port</label>
+        <type>text</type>
+        <help>Port of Logstash Server</help>
+    </field>
+    <field>
+        <id>sensor.remoteseverityregex</id>
+        <label>Regular expression for severity to syslog or logstash servers</label>
+        <type>text</type>
+        <help>Regular expression used for calculating severity attribute when sending events to SYSLOG_SERVER or LOGSTASH_SERVER.</help>
+    </field>
+    <field>
+        <id>sensor.disablelocallog</id>
+        <label>Disable local log storage</label>
+        <type>checkbox</type>
+        <help>Set only (!) in cases when LOG_SERVER should be exclusively used for log storage. IMPORTANT: With this check you can't see logs in Log section of Maltrail. Default not set.</help>
+    </field>
+    <field>
+        <id>sensor.updateserver</id>
+        <label>Remote address for trail definitions</label>
+        <type>text</type>
+        <help>Remote address for pulling (latest) trail definitions (e.g. http://192.168.2.107:8338/trails). USE_SERVER_UPDATE_TRAILS directive should be active in [Server] parameters. Default blank field.</help>
+    </field>
+    <field>
+        <id>sensor.heuristics</id>
+        <label>Use Heuristics</label>
+        <type>checkbox</type>
+        <help>Whether to enable or disable the usage or heuristic detection.</help>
+    </field>
+    <field>
+        <id>sensor.checkmissinghost</id>
+        <label>Check missing host</label>
+        <type>checkbox</type>
+        <help>Capture HTTP requests with missing Host header (introducing potential false positives). Default not set.</help>
+    </field>
+    <field>
+        <id>sensor.checkhostheader</id>
+        <label>Check Hostheaders</label>
+        <type>checkbox</type>
+        <help>Check values in Host header (along with standard non-HTTP checks) for malicious DNS trails (introducing greater number of events). Default not set.</help>
+    </field>
+    <field>
+        <id>sensor.whitelist</id>
+        <label>Whitelist</label>
+        <type>select_multiple</type>
+        <style>tokenize</style>
+        <allownew>true</allownew>
+        <help>Here you can whitelist IP addresses or domains.</help>
+    </field>
+    <field>
+        <id>sensor.ignorelist</id>
+        <label>Ignore events list</label>
+        <type>select_multiple</type>
+        <style>tokenize</style>
+        <allownew>true</allownew>
+        <help>Here you can ignore events. In this sintax src_ip;src_port;dst_ip;dst_port Esemples in /usr/local/share/maltrail/misc/ignore_events.txt</help>
+    </field>
+    <field>
+        <id>sensor.ignoreeventsregex</id>
+        <label>Regular expression to ignore events</label>
+        <type>text</type>
+        <help>Regular expression to be used against the whole event entry to be ignored. Default not set. Exemple: IGNORE_EVENTS_REGEX sql injection|long domain|117.21.225.3|sinkhole</help>
+    </field>
+    <field>
+        <id>sensor.customtrails</id>
+        <label>Blacklist</label>
+        <type>select_multiple</type>
+        <style>tokenize</style>
+        <allownew>true</allownew>
+        <help>Here you can set IP addresses or domains as blacklist event.</help>
     </field>
 </form>

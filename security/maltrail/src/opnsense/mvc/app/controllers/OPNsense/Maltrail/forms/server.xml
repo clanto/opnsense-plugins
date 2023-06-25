@@ -6,12 +6,6 @@
         <help>This will activate the Maltrail server. You can use this service to also collect data from remote Maltrail sensors.</help>
     </field>
     <field>
-        <id>server.addblocklistalias</id>
-        <label>Add Blocklist Alias</label>
-        <type>checkbox</type>
-        <help>Adds firewall alias "BlocklistMaltrail" referencing Maltrail's "/fail2ban" IP list. You can use this alias to block IPs that Maltrail detected as malicious.</help>
-    </field>
-    <field>
         <id>server.listenaddress</id>
         <label>UI Listen Address</label>
         <type>text</type>
@@ -24,6 +18,30 @@
         <help>TCP port of the server UI.</help>
     </field>
     <field>
+        <id>server.ssl</id>
+        <label>Use SSL for UI</label>
+        <type>checkbox</type>
+        <help>Use SSL and use HTTPS. Default not set.</help>
+    </field>
+    <field>
+        <id>server.sslcert</id>
+        <label>Select SSL Certificate to use.</label>
+        <type>dropdown</type>
+        <help>Select from certs in Trust Store of OPNSense</help>
+    </field>
+    <field>
+        <id>server.adminpassword</id>
+        <label>SHA256 Admin Password</label>
+        <type>text</type>
+        <help>Set the SHA256 password for user admin here. For ways to generate it, please consult the plugin documentation.</help>
+    </field>
+    <field>
+        <id>server.maskcustom</id>
+        <label>Enable Mask Custom</label>
+        <type>checkbox</type>
+        <help>Mask custom trail names for non-admin users (UID >= 1000). Default not set.</help>
+    </field>
+    <field>
         <id>server.loglistenaddress</id>
         <label>Log Listen Address</label>
         <type>text</type>
@@ -34,5 +52,31 @@
         <label>Log Listen Port</label>
         <type>text</type>
         <help>The UDP port of the log server. Leave blank if you run server and sensor on the same machine. The default when in use should be set to 8337.</help>
+    </field>
+    <field>
+        <id>server.updatetrails</id>
+        <label>Trail updates from Server</label>
+        <type>checkbox</type>
+        <help>Should server do the trail updates too (to support UPDATE_SERVER directive in [Sensor] parameters). Default not set.</help>
+    </field>
+    <field>
+        <id>server.ipaliases</id>
+        <label>IP Aliases</label>
+        <type>select_multiple</type>
+        <style>tokenize</style>
+        <allownew>true</allownew>
+        <help>Aliases used in client's web browser interface to describe the src_ip and/or dst_ip column entries. Exemple 8.8.8.8:google</help>
+    </field>
+    <field>
+        <id>server.fail2banregex</id>
+        <label>Regular expression for external calls</label>
+        <type>text</type>
+        <help>Regular expression to be used in external /fail2ban calls for extraction of attacker source IPs. Default: attacker|reputation|potential[^"]*(web scan|directory traversal|injection|remote code)|spammer|mass scanner</help>
+    </field>
+    <field>
+        <id>server.addblocklistalias</id>
+        <label>Add Blocklist Alias</label>
+        <type>checkbox</type>
+        <help>Adds firewall alias "BlocklistMaltrail" referencing Maltrail's "/fail2ban" IP list. You can use this alias to block IPs that Maltrail detected as malicious.</help>
     </field>
 </form>

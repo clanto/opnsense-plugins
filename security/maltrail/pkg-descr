@@ -10,6 +10,14 @@ WWW: https://github.com/stamparm/maltrail
 
 Changelog
 ---------
+1.11
+
+* Add new General, Sensor and Server fields
+* Add Log Section
+* Add Blacklist section
+* Save restart service from all sections
+* Start, Restart, Stop from General section
+* Cron to Start, Restart, Stop, Restart and force upgrade trails
 
 1.10
 

@@ -7,16 +7,54 @@
             <default>0</default>
             <Required>Y</Required>
         </enabled>
-        <captureall type="BooleanField">
+        <processcount type="IntegerField">
+            <default>1</default>
+            <Required>Y</Required>
+        </processcount>
+        <disablecpuaffinity type="BooleanField">
             <default>0</default>
             <Required>Y</Required>
-        </captureall>
+        </disablecpuaffinity>
+        <usefeedupdates type="BooleanField">
+            <default>1</default>
+            <Required>Y</Required>
+        </usefeedupdates>
+        <disablefeeds type="CSVListField">
+            <default>turris,ciarmy,policeman,myip,alienvault</default>
+            <Required>N</Required>
+        </disablefeeds>
+        <ipminimumfeeds type="IntegerField">
+            <default>3</default>
+            <Required>Y</Required>
+        </ipminimumfeeds>
+        <disabledtrailsinforegex type="TextField">
+            <Required>N</Required>
+        </disabledtrailsinforegex>
+        <updateperiod type="IntegerField">
+            <default>86400</default>
+            <Required>Y</Required>
+        </updateperiod>
+        <customtrailsurl type="UrlField">
+            <Required>N</Required>
+        </customtrailsurl>
         <capturebuffer type="IntegerField">
             <MinimumValue>10</MinimumValue>
             <MaximumValue>1000</MaximumValue>
             <ValidationMessage>Please specify a buffer size between 10 and 1000 MB</ValidationMessage>
             <Required>N</Required>
         </capturebuffer>
+        <monitorinterface type="InterfaceField">
+            <multiple>Y</multiple>
+            <Required>N</Required>
+        </monitorinterface>
+        <captureall type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </captureall>
+        <name type="TextField">
+            <default>$HOSTNAME</default>
+            <Required>N</Required>
+        </name>
         <remoteserver type="HostnameField">
             <Required>N</Required>
         </remoteserver>
@@ -31,5 +69,46 @@
             <default>514</default>
             <Required>Y</Required>
         </syslogport>
+        <logstashserver type="HostnameField">
+            <Required>N</Required>
+        </logstashserver>
+        <logstashport type="PortField">
+            <default>500</default>
+            <Required>Y</Required>
+        </logstashport>
+        <remoteseverityregex type="TextField">
+            <Required>N</Required>
+        </remoteseverityregex>
+        <disablelocallog type="BooleanField">
+            <default>0</default>
+            <Required>N</Required>
+        </disablelocallog>
+        <updateserver type="HostnameField">
+            <Required>N</Required>
+        </updateserver>
+        <heuristics type="BooleanField">
+            <default>1</default>
+            <Required>Y</Required>
+        </heuristics>
+        <checkmissinghost type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </checkmissinghost>
+        <checkhostheader type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </checkhostheader>
+        <whitelist type="CSVListField">
+            <Required>N</Required>
+        </whitelist>
+        <ignorelist type="CSVListField">
+            <Required>N</Required>
+        </ignorelist>
+        <ignoreeventsregex type="TextField">
+            <Required>N</Required>
+        </ignoreeventsregex>
+        <customtrails type="CSVListField">
+            <Required>N</Required>
+        </customtrails>
     </items>
 </model>

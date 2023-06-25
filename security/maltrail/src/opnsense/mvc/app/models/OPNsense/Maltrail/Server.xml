@@ -7,10 +7,6 @@
             <default>0</default>
             <Required>Y</Required>
         </enabled>
-        <addblocklistalias type="BooleanField">
-            <default>0</default>
-            <Required>Y</Required>
-        </addblocklistalias>
         <listenaddress type="HostnameField">
             <default>0.0.0.0</default>
             <Required>Y</Required>
@@ -20,11 +16,42 @@
             <default>8338</default>
             <Required>Y</Required>
         </listenport>
+        <ssl type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </ssl>
+        <sslcert type="CertificateField">
+            <Type>cert</Type>
+            <Required>N</Required>
+        </sslcert>
+        <adminpassword type="TextField">
+            <default>9ab3cd9d67bf49d01f6a2e33d0bd9bc804ddbe6ce1ff5d219c42624851db5dbc</default>
+            <Required>Y</Required>
+        </adminpassword>
+        <maskcustom type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </maskcustom>
         <loglistenaddress type="HostnameField">
             <Required>N</Required>
         </loglistenaddress>
         <loglistenport type="PortField">
             <Required>N</Required>
         </loglistenport>
+        <updatetrails type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </updatetrails>
+        <ipaliases type="CSVListField">
+            <Required>N</Required>
+        </ipaliases>
+        <fail2banregex type="TextField">
+            <default>attacker|reputation|potential[^"]*(web scan|directory traversal|injection|remote code)|spammer|mass scanner</default>
+            <Required>Y</Required>
+        </fail2banregex>
+        <addblocklistalias type="BooleanField">
+            <default>0</default>
+            <Required>Y</Required>
+        </addblocklistalias>
     </items>
 </model>
