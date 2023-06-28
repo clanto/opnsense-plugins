@@ -33,7 +33,7 @@ namespace OPNsense\Maltrail\Migrations;
 use OPNsense\Base\BaseModelMigration;
 use OPNsense\Core\Config;
 
-class M1_11 extends BaseModelMigration
+class M1_11_0 extends BaseModelMigration
 {
     public function run($model)
     {
