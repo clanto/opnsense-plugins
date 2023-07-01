@@ -45,5 +45,6 @@ class M1_11_0 extends BaseModelMigration
 			$maltrailconfig->sensor->monitorinterface = (string)$maltrailconfig->general->monitorinterface;
 			$maltrailconfig->sensor->whitelist = (string)$maltrailconfig->general->whitelist;
 			}
+		parent::run($model);
         }
     }
