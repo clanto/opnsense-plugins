@@ -51,7 +51,7 @@ class M1_11_0 extends BaseModelMigration
 			$model->sensor->checkhostheader = $checkhostheader;
 			$model->sensor->updateperiod = $updateperiod;
 			$model->server->adminpassword = $adminpassword;
-			$model->sensor->>monitorinterface = $monitorinterface;
+			$model->sensor->monitorinterface = $monitorinterface;
 			$model->sensor->whitelist = $whitelist;
 			}
 		parent::run($model);
