@@ -30,7 +30,6 @@
 namespace OPNsense\Maltrail\Migrations;
 
 use OPNsense\Base\BaseModelMigration;
-use OPNsense\Core\Config;
 
 class M1_11_0 extends BaseModelMigration
 {
@@ -38,16 +37,16 @@ class M1_11_0 extends BaseModelMigration
     {
 		
         if (!empty($model)) {
-			$general = (string)$model->general;
-			$sensor = (string)$model->sensor;
-			$server = (string)$model->server;
-			$sensor->heuristics = setValue($general->heuristics);
-			$sensor->checkhostheader = setValue($general->checkhostheader);
-			$sensor->updateperiod = setValue($general->updateperiod);
-			$server->adminpassword = setValue($general->adminpassword);
-			$sensor->monitorinterface = setValue($general->monitorinterface);
-			$sensor->whitelist = setValue($general->whitelist);
-		}
+	$general = $model->getNodeByReference('general')->iterateItems();
+	$sensor = $model->getNodeByReference('sensor')->iterateItems();
+	$server = $model->getNodeByReference('server')->iterateItems();
+			$sensor->heuristics = (string)$general->heuristics;
+			$sensor->checkhostheader = (string)$general->checkhostheader;
+			$sensor->updateperiod = (string)$general->updateperiod;
+			$server->adminpassword = (string)$general->adminpassword;
+			$sensor->monitorinterface = (string)$general->monitorinterface;
+			$sensor->whitelist = (string)$general->whitelist;
+			}
 		parent::run($model);
+        }
     }
-}
