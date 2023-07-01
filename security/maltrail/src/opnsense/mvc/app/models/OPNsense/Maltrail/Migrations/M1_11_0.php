@@ -33,7 +33,7 @@ use OPNsense\Base\BaseModelMigration;
 
 class M1_11_0 extends BaseModelMigration
 {
-    public function run($model)
+    public function post($model)
     {
         if (!empty($model)) {
 			$model->sensor->heuristics = (string)$model->general->heuristics;
@@ -43,6 +43,6 @@ class M1_11_0 extends BaseModelMigration
 			$model->sensor->monitorinterface = (string)$model->general->monitorinterface;
 			$model->sensor->whitelist = (string)$model->general->whitelist;
 			}
-		parent::run($model);
+		return;
         }
     }
