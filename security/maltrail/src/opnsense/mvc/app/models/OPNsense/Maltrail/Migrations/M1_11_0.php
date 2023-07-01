@@ -36,6 +36,7 @@ class M1_11_0 extends BaseModelMigration
     public function post($model)
     {
         if (!empty($model)) {
+			echo $model->general->heuristics;
 			$model->sensor->heuristics = (string)$model->general->heuristics;
 			$model->sensor->checkhostheader = (string)$model->general->checkhostheader;
 			$model->sensor->updateperiod = (string)$model->general->updateperiod;
