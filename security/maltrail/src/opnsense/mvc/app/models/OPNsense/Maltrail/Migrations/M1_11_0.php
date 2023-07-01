@@ -35,26 +35,25 @@ class M1_11_0 extends BaseModelMigration
 {
     public function run($model)
     {
-	$heuristics = (string)$model->general->heuristics;
-	$checkhostheader = (string)$model->general->checkhostheader;
-	$updateperiod = (string)$model->general->updateperiod;
-	$adminpassword = (string)$model->general->adminpassword;
-	$monitorinterface = (string)$model->general->monitorinterface;
-	$whitelist = (string)$model->general->whitelist;
+	$general = $model->getNodeByReference('general');
+	$sensor = $model->getNodeByReference('sensor');
+	$server = $model->getNodeByReference('server');
 	
-	echo $heuristics;
-	echo $checkhostheader;
-	echo $updateperiod;
-	echo $adminpassword;
-		
-			$model->sensor->heuristics = $heuristics;
-			$model->sensor->checkhostheader = $checkhostheader;
-			$model->sensor->updateperiod = $updateperiod;
-			$model->server->adminpassword = $adminpassword;
-			$model->sensor->monitorinterface = $monitorinterface;
-			$model->sensor->whitelist = $whitelist;
-					parent::run($model);
+	$sensor->heuristics = new stdClass();
+	$sensor->checkhostheader = new stdClass();
+	$sensor->updateperiod = new stdClass();
+	$server->adminpassword = new stdClass();
+	$sensor->monitorinterface = new stdClass();
+	$sensor->whitelist = new stdClass();
+	
+        if (!empty($model)) {
+			$sensor->heuristics = (string)$general->heuristics;
+			$sensor->checkhostheader = (string)$general->checkhostheader;
+			$sensor->updateperiod = (string)$general->updateperiod;
+			$server->adminpassword = (string)$general->adminpassword;
+			$sensor->monitorinterface = (string)$general->monitorinterface;
+			$sensor->whitelist = (string)$general->whitelist;
 			}
-
-        
+		parent::run($model);
+        }
     }
