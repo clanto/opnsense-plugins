@@ -35,15 +35,13 @@ class M1_11_0 extends BaseModelMigration
 {
     public function run($model)
     {
-        $configObj = Config::getInstance()->object();
-        if (!empty($configObj->OPNsense->maltrail)) {
-			$maltrailconfig = $configObj->OPNsense->maltrail;
-			$maltrailconfig->sensor->heuristics = (string)$maltrailconfig->general->heuristics;
-			$maltrailconfig->sensor->checkhostheader = (string)$maltrailconfig->general->checkhostheader;
-			$maltrailconfig->sensor->updateperiod = (string)$maltrailconfig->general->updateperiod;
-			$maltrailconfig->server->adminpassword = (string)$maltrailconfig->general->adminpassword;
-			$maltrailconfig->sensor->monitorinterface = (string)$maltrailconfig->general->monitorinterface;
-			$maltrailconfig->sensor->whitelist = (string)$maltrailconfig->general->whitelist;
+        if (!empty($model)) {
+			$model->sensor->heuristics = (string)$model->general->heuristics;
+			$model->sensor->checkhostheader = (string)$model->general->checkhostheader;
+			$model->sensor->updateperiod = (string)$model->general->updateperiod;
+			$model->server->adminpassword = (string)$model->general->adminpassword;
+			$model->sensor->monitorinterface = (string)$model->general->monitorinterface;
+			$model->sensor->whitelist = (string)$model->general->whitelist;
 			}
 		parent::run($model);
         }
