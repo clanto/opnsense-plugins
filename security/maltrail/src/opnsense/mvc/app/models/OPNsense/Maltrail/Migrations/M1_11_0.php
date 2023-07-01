@@ -35,25 +35,18 @@ class M1_11_0 extends BaseModelMigration
 {
     public function run($model)
     {
-	$general = $model->getNodeByReference('general');
-	$sensor = $model->getNodeByReference('sensor');
-	$server = $model->getNodeByReference('server');
-	
-	$sensor->heuristics = new stdClass();
-	$sensor->checkhostheader = new stdClass();
-	$sensor->updateperiod = new stdClass();
-	$server->adminpassword = new stdClass();
-	$sensor->monitorinterface = new stdClass();
-	$sensor->whitelist = new stdClass();
-	
+		
         if (!empty($model)) {
-			$sensor->heuristics = (string)$general->heuristics;
-			$sensor->checkhostheader = (string)$general->checkhostheader;
-			$sensor->updateperiod = (string)$general->updateperiod;
-			$server->adminpassword = (string)$general->adminpassword;
-			$sensor->monitorinterface = (string)$general->monitorinterface;
-			$sensor->whitelist = (string)$general->whitelist;
-			}
+			$general = (string)$model->general;
+			$sensor = (string)$model->sensor;
+			$server = (string)$model->server;
+			$sensor->heuristics = setValue($general->heuristics);
+			$sensor->checkhostheader = setValue($general->checkhostheader);
+			$sensor->updateperiod = setValue($general->updateperiod);
+			$server->adminpassword = setValue($general->adminpassword);
+			$sensor->monitorinterface = setValue($general->monitorinterface);
+			$sensor->whitelist = setValue($general->whitelist);
+		}
 		parent::run($model);
-        }
     }
+}
