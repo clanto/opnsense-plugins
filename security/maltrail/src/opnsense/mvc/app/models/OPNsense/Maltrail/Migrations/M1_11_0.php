@@ -33,17 +33,19 @@ use OPNsense\Base\BaseModelMigration;
 
 class M1_11_0 extends BaseModelMigration
 {
-    public function post($model)
+    public function run($model)
     {
+	$general = $model->getNodeByReference('general');
+	$sensor = $model->getNodeByReference('sensor');
+	$server = $model->getNodeByReference('server');
         if (!empty($model)) {
-			echo $model->general->heuristics;
-			$model->sensor->heuristics = (string)$model->general->heuristics;
-			$model->sensor->checkhostheader = (string)$model->general->checkhostheader;
-			$model->sensor->updateperiod = (string)$model->general->updateperiod;
-			$model->server->adminpassword = (string)$model->general->adminpassword;
-			$model->sensor->monitorinterface = (string)$model->general->monitorinterface;
-			$model->sensor->whitelist = (string)$model->general->whitelist;
+			$sensor->heuristics = (string)$general->heuristics;
+			$sensor->checkhostheader = (string)$general->checkhostheader;
+			$sensor->updateperiod = (string)$general->updateperiod;
+			$server->adminpassword = (string)$general->adminpassword;
+			$sensor->monitorinterface = (string)$general->monitorinterface;
+			$sensor->whitelist = (string)$general->whitelist;
 			}
-		return;
+		parent::run($model);
         }
     }
