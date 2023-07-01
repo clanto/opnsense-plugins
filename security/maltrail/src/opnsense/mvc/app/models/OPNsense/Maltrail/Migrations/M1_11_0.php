@@ -30,6 +30,7 @@
 namespace OPNsense\Maltrail\Migrations;
 
 use OPNsense\Base\BaseModelMigration;
+use OPNsense\Core\Config;
 
 class M1_11_0 extends BaseModelMigration
 {
