@@ -53,7 +53,8 @@ class M1_11_0 extends BaseModelMigration
 			$model->server->adminpassword = $adminpassword;
 			$model->sensor->monitorinterface = $monitorinterface;
 			$model->sensor->whitelist = $whitelist;
+					parent::run($model);
 			}
-		parent::run($model);
+
         
     }
