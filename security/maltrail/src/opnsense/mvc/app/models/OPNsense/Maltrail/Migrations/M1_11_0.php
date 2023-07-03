@@ -29,21 +29,23 @@
 
 namespace OPNsense\Maltrail\Migrations;
 
+use OPNsense\Core\Config;
 use OPNsense\Base\BaseModelMigration;
 
 class M1_11_0 extends BaseModelMigration
 {
-    public function run($model)
+    public function post($model)
     {
-	$general = $model->getNodeByReference('maltrail')->general;
-	$sensor = $model->getNodeByReference('maltrail')->sensor;
-	$server = $model->getNodeByReference('maltrail')->server;
-			$sensor->heuristics = (string)$general->heuristics;
-			$sensor->checkhostheader = (string)$general->checkhostheader;
-			$sensor->updateperiod = (string)$general->updateperiod;
-			$server->adminpassword = (string)$general->adminpassword;
-			$sensor->monitorinterface = (string)$general->monitorinterface;
-			$sensor->whitelist = (string)$general->whitelist;
-		parent::run($model);
+	$configObj = Config::getInstance()->object();
+	$general = $configObj->OPNsense->maltrail->general;
+	$sensor = $configObj->OPNsense->maltrail->sensor;
+	$server = $configObj->OPNsense->maltrail->server;
+	$sensor->heuristics = (string)$general->heuristics;
+	$sensor->checkhostheader = (string)$general->checkhostheader;
+	$sensor->updateperiod = (string)$general->updateperiod;
+	$server->adminpassword = (string)$general->adminpassword;
+	$sensor->monitorinterface = (string)$general->monitorinterface;
+	$sensor->whitelist = (string)$general->whitelist;
+	Config::getInstance()->save();
 	}
-    }
+}
