@@ -40,6 +40,7 @@ class M1_11_0 extends BaseModelMigration
 	$general = $configObj->OPNsense->maltrail->general;
 	$sensor = $configObj->OPNsense->maltrail->sensor;
 	$server = $configObj->OPNsense->maltrail->server;
+
 	$sensor->heuristics = $general->heuristics;
 	$sensor->checkhostheader = $general->checkhostheader;
 	$sensor->updateperiod = $general->updateperiod;
