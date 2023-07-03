@@ -35,19 +35,15 @@ class M1_11_0 extends BaseModelMigration
 {
     public function run($model)
     {
-        foreach ($model->getNodeByReference('maltrail')->iterateItems() as $maltrail) {
-        if (!empty($model)) {
-	$general = $maltrail->general;
-	$sensor = $maltrail->sensor;
-	$server = $maltrail->server;
+	$general = $model->getNodeByReference('maltrail')->general;
+	$sensor = $model->getNodeByReference('maltrail')->sensor;
+	$server = $model->getNodeByReference('maltrail')->server;
 			$sensor->heuristics = (string)$general->heuristics;
 			$sensor->checkhostheader = (string)$general->checkhostheader;
 			$sensor->updateperiod = (string)$general->updateperiod;
 			$server->adminpassword = (string)$general->adminpassword;
 			$sensor->monitorinterface = (string)$general->monitorinterface;
 			$sensor->whitelist = (string)$general->whitelist;
-			}
 		parent::run($model);
-        }
 	}
     }
