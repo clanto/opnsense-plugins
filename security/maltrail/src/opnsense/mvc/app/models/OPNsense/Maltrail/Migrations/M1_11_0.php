@@ -34,7 +34,7 @@ use OPNsense\Base\BaseModelMigration;
 
 class M1_11_0 extends BaseModelMigration
 {
-    public function post($model)
+    public function run($model)
     {
 	$configObj = Config::getInstance()->object();
 	$general = $configObj->OPNsense->maltrail->general;
@@ -48,6 +48,5 @@ class M1_11_0 extends BaseModelMigration
 	$sensor->monitorinterface = (string)$general->monitorinterface;
 	$sensor->whitelist = (string)$general->whitelist;
 	Config::getInstance()->save();
-	return;
 	}
 }
